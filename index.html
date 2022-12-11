@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title></title>
+<style type="text/css">
+@import url('https://fonts.googleapis.com/css2?family=Encode+Sans+Semi+Expanded:wght@500&display=swap');
+body{
+font-family: 'Encode Sans Semi Expanded', sans-serif;
+}
+
+div{
+background-color:#FAF1F4;
+width:90%;
+height:auto;
+margin:0px;
+padding:0px 0px 4px 0px;
+border-radius:20px;
+}
+#label{
+background-color:#FFDAD2;
+podition:relative;
+width:100%;
+height:auto;
+padding-top:10px;
+padding-bottom:10px;
+border-radius:20px 20px 0px 0px;
+}
+#iptool{
+background-color:#FFDAD2;
+padding:5px;
+}
+img{
+border-radius:20px;
+}
+p{
+font-size:20px;
+}
+input{
+background-color:#FAF1F4;
+border-radius:20px;
+width:60%;
+height:50px;
+border:none;
+font-size:20px;
+font-family: 'Encode Sans Semi Expanded', sans-serif;
+}
+button{
+background-color:#FFDAD2;
+height:50px;
+border:none;
+border-radius:20px;
+font-family: 'Encode Sans Semi Expanded', sans-serif;
+font-size:15px;
+}
+</style>
+</head>
+<body onload="myip()" bgcolor="#FFFBFF">
+<center>
+<div id="iptool">
+<h1 id="query">IP TOOL</h1>
+</div>
+<br>
+<img id="flag" width="180" height="120">
+<br><br>
+<div>
+<div id="label"><label>Country</label></div><p id="country"></p>
+</div>
+<br>
+<div>
+<div id="label"><label>Region</label></div><p id="region"></p>
+</div>
+<br>
+<div>
+<div id="label"><label>City</label></div><p id="city"></p>
+</div>
+<br>
+<div>
+<div id="label"><label>ISP</label></div><p id="isp"></p>
+</div>
+<br>
+<div>
+<div id="label"><label>Your IP</label></div><p id="myip"></p>
+</div>
+<br><br>
+<input id="ip" type="ip">
+<button onclick="customIP()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lookup&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+</center>
+<script type="text/javascript">
+
+function id(x){ var y = document.getElementById(x); return y;}
+
+function customIP(){
+var cip = id("ip").value;
+checkip(cip);
+}
+function myip(){
+var ipapi = "https://api.ipify.org?format=json";
+fetch(ipapi)  
+    .then(res => res.json())  
+    .then((out) => {
+    var ip = out.ip;
+    id("myip").innerHTML = ip;
+    checkip(ip);
+    }) 
+    .catch(err => {  
+    throw err  
+    });
+}
+function flag(x){
+var flagapi = "https://countryflagsapi.com/png/" + x;
+return flagapi;
+}
+
+function checkip(x){
+var api = "http://ip-api.com/json/"
+var url = api + x;
+
+fetch(url)  
+    .then(res => res.json())  
+    .then((out) => {
+    id("country").innerHTML = out.country;
+    id("region").innerHTML = out.regionName;
+    id("city").innerHTML = out.city;
+    id("isp").innerHTML = out.isp;
+    id("query").innerHTML = out.query;
+    id("flag").setAttribute("src", flag(out.countryCode));
+    }) 
+    .catch(err => {  
+    throw err  
+    });
+}
+</script>
+</body>
+</html>
