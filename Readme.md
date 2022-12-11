@@ -8,7 +8,7 @@ IP TOOL can lookup for IP address, IP location and convert domain to IP address.
     <img alt="Open Source? Yes!" src="https://badgen.net/badge/Open%20Source%20%3F/Yes%21/blue?icon=github"/>
 
 ## Live Demo
-[Live Demo](https://shailendramaurya.github.io/ip-tool)
+[Live Demo](https://shailendramaurya.github.io/IP-TOOL)
 
 ## Installation
 Download and extract this repo and navigate to index.html file
